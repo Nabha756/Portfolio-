@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nabha Kulkarni</title>
+<meta name="description" content="Nabha Kulkarni, Computer Engineering student in Pune (graduating June 2028). Backend, database and testing projects in Java, Python and C++.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout: an engineering logbook. Each project is an exhibit you can operate; one live system in the hero, everything else quiet. */
+  --bg:#F2F3EF; --surface:#FFFFFF; --sunk:#E8EAE5; --ink:#12171C; --muted:#5A636C; --line:#D6DAD3;
+  --accent:#0E7A5A; --accent-ink:#FFFFFF; --accent-soft:#DCEFE7;
+  --ok:#0E7A5A; --warn:#B7790B; --bad:#C2410C;
+  --display:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C1013; --surface:#13191E; --sunk:#0F1418; --ink:#E5EAE6; --muted:#97A19C; --line:#24302F;
+    --accent:#3CC896; --accent-ink:#06120D; --accent-soft:#12302A;
+    --ok:#3CC896; --warn:#E3A93B; --bad:#F07A4A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C1013; --surface:#13191E; --sunk:#0F1418; --ink:#E5EAE6; --muted:#97A19C; --line:#24302F;
+  --accent:#3CC896; --accent-ink:#06120D; --accent-soft:#12302A;
+  --ok:#3CC896; --warn:#E3A93B; --bad:#F07A4A; color-scheme: dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+img{max-width:100%;display:block;height:auto}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.02em}
+.mono{font-family:var(--mono)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+.mark{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--ink);text-decoration:none;letter-spacing:.02em}
+.mark span{color:var(--accent)}
+.top nav{display:flex;gap:22px;align-items:center}
+.top nav a{font-family:var(--mono);font-size:13px;color:var(--muted);text-decoration:none}
+.top nav a:hover{color:var(--ink)}
+.top nav a.cta{color:var(--accent-ink);background:var(--accent);padding:7px 12px;border-radius:6px}
+@media (max-width:760px){.top nav a:not(.cta){display:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:44px;padding:56px 0 40px;align-items:start}
+@media (max-width:980px){.hero{grid-template-columns:1fr;gap:32px;padding-top:36px}}
+.eyebrow{font-family:var(--mono);font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.name{font-size:clamp(52px,8vw,104px);font-weight:800;letter-spacing:-.045em;line-height:.9;margin:14px 0 18px}
+.thesis{font-family:var(--display);font-weight:500;font-size:clamp(22px,2.6vw,30px);line-height:1.2;max-width:22ch;letter-spacing:-.015em}
+.thesis em{font-style:normal;color:var(--accent)}
+.lede{color:var(--muted);max-width:52ch;margin:18px 0 22px}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 15px;border-radius:7px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;font-weight:500;font-size:15px;cursor:pointer;font-family:var(--body)}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.proof{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:30px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof div{padding:14px 12px 12px 0}
+.proof div+div{padding-left:14px;border-left:1px solid var(--line)}
+.proof b{display:block;font-family:var(--display);font-size:34px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1}
+.proof span{font-size:13px;color:var(--muted);line-height:1.3;display:block;margin-top:6px}
+@media (max-width:520px){.proof{grid-template-columns:repeat(2,1fr)}.proof div:nth-child(3){padding-left:0;border-left:0}.proof div:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* simulator */
+.sim{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(0,0,0,.35)}
+.sim-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px}
+.sim-head .live{display:inline-flex;align-items:center;gap:7px;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
+.sim svg{display:block;width:100%;height:auto;background:var(--sunk)}
+.sim svg .node rect{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.sim svg .node.hot rect{stroke:var(--accent)}
+.sim svg text{font-family:var(--mono);fill:var(--ink);font-size:12px}
+.sim svg .sub{fill:var(--muted);font-size:10.5px}
+.sim svg .wire{stroke:var(--line);stroke-width:2;fill:none}
+.sim svg .wire.retry{stroke:var(--warn);stroke-dasharray:5 4;opacity:.75}
+.sim svg .wire.dead{stroke:var(--bad);stroke-dasharray:5 4;opacity:.75}
+.sim-controls{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;border-top:1px solid var(--line);align-items:center}
+.sim-controls .btn{padding:7px 12px;font-size:14px}
+.sim-controls .spacer{flex:1}
+.toggle{font-family:var(--mono);font-size:12px;color:var(--muted);display:inline-flex;gap:6px;align-items:center}
+.counters{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.counters div{padding:10px 16px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.counters div+div{border-left:1px solid var(--line)}
+.counters b{display:block;font-size:20px;color:var(--ink);font-variant-numeric:tabular-nums}
+.counters .c-ok b{color:var(--ok)} .counters .c-retry b{color:var(--warn)} .counters .c-dead b{color:var(--bad)}
+.log{margin:0;padding:10px 16px 14px;list-style:none;font-family:var(--mono);font-size:12px;line-height:1.7;height:118px;overflow:hidden;border-top:1px solid var(--line);color:var(--muted)}
+.log li b{font-weight:500}
+.log .ok{color:var(--ok)} .log .warn{color:var(--warn)} .log .bad{color:var(--bad)}
+.sim-foot{padding:10px 16px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line)}
+
+/* sections */
+section{padding:72px 0;border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;margin-bottom:34px;align-items:baseline}
+.sec-head .idx{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.sec-head h2{font-size:clamp(30px,4vw,46px);font-weight:800}
+.sec-head p{grid-column:2;margin:12px 0 0;color:var(--muted);max-width:62ch}
+@media (max-width:760px){.sec-head{grid-template-columns:1fr;gap:6px}.sec-head p{grid-column:1}}
+
+/* case studies */
+.case{display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;padding:40px 0;border-top:1px dashed var(--line)}
+.case:first-of-type{border-top:0;padding-top:0}
+@media (max-width:760px){.case{grid-template-columns:1fr;gap:12px}}
+.case-meta{font-family:var(--mono);font-size:12.5px;color:var(--muted);display:grid;gap:6px;align-content:start}
+.case-meta .n{font-size:40px;font-family:var(--display);font-weight:800;color:var(--ink);letter-spacing:-.04em;line-height:1}
+.case-meta a{font-size:12.5px}
+.case h3{font-size:clamp(26px,3vw,36px);font-weight:800}
+.case .one{font-size:18px;margin:10px 0 18px;max-width:60ch}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.stack span{font-family:var(--mono);font-size:12px;border:1px solid var(--line);padding:3px 8px;border-radius:5px;background:var(--surface)}
+.dec{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:20px}
+.dec div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.dec h4{margin:0 0 6px;font:600 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+.dec p{margin:0;font-size:15px}
+pre.code{margin:0 0 18px;background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;font:13px/1.65 var(--mono)}
+pre.code .k{color:var(--accent)} pre.code .s{color:var(--warn)} pre.code .c{color:var(--muted)}
+.cap{font-size:13px;color:var(--muted);margin:-10px 0 18px}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.shots{grid-template-columns:1fr}}
+.shot{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.shot figcaption{font-size:12.5px;color:var(--muted);padding:8px 12px;border-top:1px solid var(--line);font-family:var(--mono)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+@media (max-width:640px){.metrics{grid-template-columns:repeat(2,1fr)}}
+.metric{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.metric b{display:block;font-family:var(--display);font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.03em;line-height:1}
+.metric span{font-size:12.5px;color:var(--muted)}
+.links{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:13px}
+
+/* index lab */
+.lab{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.lab-q{padding:16px 18px;border-bottom:1px solid var(--line);font:13.5px/1.6 var(--mono);background:var(--sunk);overflow-x:auto;white-space:nowrap}
+.lab-q .k{color:var(--accent)}
+.lab-body{display:grid;grid-template-columns:300px minmax(0,1fr)}
+@media (max-width:820px){.lab-body{grid-template-columns:1fr}}
+.lab-pick{padding:16px 18px;border-right:1px solid var(--line);display:grid;gap:8px;align-content:start}
+@media (max-width:820px){.lab-pick{border-right:0;border-bottom:1px solid var(--line)}}
+.lab-pick legend{font:600 12px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px;padding:0}
+.lab-pick fieldset{border:0;margin:0;padding:0;display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer;background:var(--bg)}
+.opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.opt input{margin-top:4px;accent-color:var(--accent)}
+.opt code{font:12.5px var(--mono);display:block}
+.opt small{color:var(--muted);font-size:12.5px;line-height:1.35;display:block;margin-top:2px}
+.lab-out{padding:18px}
+.plan{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px;font:600 12.5px var(--mono)}
+.stage{padding:6px 10px;border-radius:6px;border:1px solid var(--line);background:var(--bg)}
+.stage.bad{border-color:var(--bad);color:var(--bad)} .stage.good{border-color:var(--ok);color:var(--ok)} .stage.warn{border-color:var(--warn);color:var(--warn)}
+.arrow{color:var(--muted)}
+.bars{display:grid;gap:12px;margin-bottom:16px}
+.bar-row{display:grid;grid-template-columns:150px minmax(0,1fr) 90px;gap:12px;align-items:center;font-size:13.5px}
+@media (max-width:520px){.bar-row{grid-template-columns:110px minmax(0,1fr) 70px}}
+.bar-row .lbl{color:var(--muted);font-family:var(--mono);font-size:12px}
+.track{height:12px;background:var(--sunk);border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.fill{height:100%;background:var(--accent);border-radius:6px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.fill.bad{background:var(--bad)} .fill.warn{background:var(--warn)}
+@media (prefers-reduced-motion: reduce){.fill{transition:none}}
+.bar-row .val{font:600 13px var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.verdict{border-left:3px solid var(--accent);padding:4px 0 4px 14px;margin:0;max-width:66ch}
+.lab-note{padding:12px 18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+
+/* refund widget */
+.ledger{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:12px;margin-bottom:18px}
+.ledger-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:13px}
+.pill{font:600 11.5px var(--mono);padding:3px 9px;border-radius:999px;border:1px solid currentColor;text-transform:uppercase;letter-spacing:.04em}
+.pill.Completed{color:var(--ok)} .pill.PartiallyRefunded{color:var(--warn)} .pill.Refunded{color:var(--muted)}
+.ledger-row{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.ledger-row label{display:grid;gap:4px;font-size:13px;color:var(--muted)}
+.ledger-row input{font:15px var(--mono);padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--ink);width:150px}
+.ledger-out{font:12.5px/1.6 var(--mono);margin:0;padding:10px 12px;background:var(--sunk);border-radius:8px;border:1px solid var(--line);min-height:44px;white-space:pre-wrap}
+.ledger-out .bad{color:var(--bad)} .ledger-out .ok{color:var(--ok)}
+
+/* small lists */
+.rows{display:grid;gap:0}
+.row{display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;padding:18px 0;border-top:1px solid var(--line)}
+.row:first-child{border-top:0;padding-top:0}
+@media (max-width:760px){.row{grid-template-columns:1fr;gap:4px}}
+.row .when{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:3px}
+.row h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.row p,.row ul{margin:6px 0 0;color:var(--muted);max-width:68ch}
+.row ul{padding-left:18px}
+.more{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.more a{display:grid;gap:4px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);text-decoration:none}
+.more a:hover{border-color:var(--accent)}
+.more b{font-family:var(--display);font-size:17px}
+.more span{font-size:13.5px;color:var(--muted)}
+.more i{font-style:normal;font:12px var(--mono);color:var(--accent)}
+
+.contact-big{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,58px);letter-spacing:-.03em;line-height:1.05;margin:0 0 20px;max-width:18ch}
+.contact-lines{display:grid;gap:8px;font-family:var(--mono);font-size:14.5px}
+.contact-lines code{background:var(--surface);border:1px solid var(--line);padding:2px 8px;border-radius:6px}
+footer{padding:28px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);font-family:var(--mono)}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="mark" href="#top">nabha<span>.</span>kulkarni</a>
+  <nav aria-label="Sections">
+    <a href="#work">Work</a><a href="#lab">Index lab</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
+    <a class="cta" href="Nabha_Kulkarni_Resume.pdf">Resume</a>
+  </nav>
+</div></header>
+
+<main id="top">
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">B.E. Computer Engineering · Pune · June 2028</div>
+      <h1 class="name">Nabha<br>Kulkarni</h1>
+      <p class="thesis">Backend development, databases and testing.</p>
+      <p class="lede">Third-year student at PES Modern College of Engineering, Pune, looking for a software engineering internship. My projects are mostly backend services in Java, Python and C++. The panel on the right simulates the retry logic from one of them, FlowSync.</p>
+      <div class="actions">
+        <a class="btn primary" href="#work">Projects</a>
+        <a class="btn" href="Nabha_Kulkarni_Resume.pdf">Resume (PDF)</a>
+        <a class="btn" href="https://github.com/Nabha756">GitHub</a>
+        <a class="btn" href="https://linkedin.com/in/nabha-kulkarni-90bcd">LinkedIn</a>
+      </div>
+      <div class="proof" aria-label="At a glance">
+        <div><b>185</b><span>automated tests across five projects</span></div>
+        <div><b>4</b><span>languages used in projects</span></div>
+        <div><b>3</b><span>live deployments</span></div>
+        <div><b>8.89</b><span>CGPA out of 10</span></div>
+      </div>
+    </div>
+
+    <div class="sim" id="sim" aria-label="FlowSync retry pipeline simulation">
+      <div class="sim-head">
+        <span>flowsync / job pipeline</span>
+        <span class="live"><span class="dot" aria-hidden="true"></span><span id="simState">running</span></span>
+      </div>
+      <svg id="simSvg" viewBox="0 0 640 300" role="img" aria-labelledby="simTitle">
+        <title id="simTitle">Jobs flow from the REST API through the exchange to the job queue and a worker. Failed jobs wait in a retry queue and return; jobs that exhaust retries go to the dead-letter queue.</title>
+        <path class="wire" d="M92 70 H162"/><path class="wire" d="M262 70 H322"/><path class="wire" d="M422 70 H482"/>
+        <path class="wire" d="M555 92 V140"/>
+        <path class="wire retry" d="M495 92 V214 H422"/>
+        <path class="wire retry" d="M322 214 H212 V92"/>
+        <path class="wire dead" d="M582 70 H612 V214"/>
+        <g class="node" id="n-api"><rect x="12" y="48" width="80" height="44" rx="8"/><text x="52" y="68" text-anchor="middle">REST API</text><text class="sub" x="52" y="83" text-anchor="middle">POST /jobs</text></g>
+        <g class="node" id="n-ex"><rect x="162" y="48" width="100" height="44" rx="8"/><text x="212" y="68" text-anchor="middle">exchange</text><text class="sub" x="212" y="83" text-anchor="middle">topic</text></g>
+        <g class="node" id="n-q"><rect x="322" y="48" width="100" height="44" rx="8"/><text x="372" y="68" text-anchor="middle">job.queue</text><text class="sub" x="372" y="83" text-anchor="middle" id="qDepth">depth 0</text></g>
+        <g class="node" id="n-w"><rect x="482" y="48" width="100" height="44" rx="8"/><text x="532" y="68" text-anchor="middle">worker</text><text class="sub" x="532" y="83" text-anchor="middle" id="wState">idle</text></g>
+        <g class="node" id="n-db"><rect x="510" y="140" width="96" height="40" rx="8"/><text x="558" y="158" text-anchor="middle">PostgreSQL</text><text class="sub" x="558" y="172" text-anchor="middle">history</text></g>
+        <g class="node" id="n-r"><rect x="322" y="192" width="100" height="44" rx="8"/><text x="372" y="211" text-anchor="middle">retry.queue</text><text class="sub" x="372" y="226" text-anchor="middle">TTL 10 s → DLX</text></g>
+        <g class="node" id="n-d"><rect x="530" y="214" width="100" height="44" rx="8" style="stroke:var(--bad)"/><text x="580" y="233" text-anchor="middle">dead-letter</text><text class="sub" x="580" y="248" text-anchor="middle" id="dDepth">0 parked</text></g>
+        <text class="sub" x="488" y="150" text-anchor="end">failed, retries left</text>
+        <text class="sub" x="224" y="255">TTL expires → back to work queue</text>
+        <g id="tokens"></g>
+      </svg>
+      <div class="sim-controls">
+        <button class="btn" id="bJob" type="button">Submit job</button>
+        <button class="btn" id="bPoison" type="button">Submit failing job</button>
+        <span class="spacer"></span>
+        <label class="toggle"><input type="checkbox" id="tAuto" checked> auto-submit</label>
+        <label class="toggle"><input type="checkbox" id="tFast" checked> 5× speed</label>
+      </div>
+      <div class="counters">
+        <div class="c-ok"><b id="cOk">0</b>completed</div>
+        <div class="c-retry"><b id="cRetry">0</b>retries</div>
+        <div class="c-dead"><b id="cDead">0</b>dead-lettered</div>
+        <div><b id="cIn">0</b>in flight</div>
+      </div>
+      <ul class="log" id="log" aria-live="polite"></ul>
+      <div class="sim-foot">Uses the same settings as FlowSync: a failed job waits 10 s in the retry queue, then returns to the job queue. After 3 retries it goes to the dead-letter queue. In this simulation, normal jobs fail 20% of the time.</div>
+    </div>
+  </div>
+</div>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">01 · Work</span><div><h2>Projects</h2></div>
+      <p>Each project lists the problem, the approach and how it is tested. The code for all of them is on GitHub.</p></div>
+
+    <article class="case" id="flowsync">
+      <div class="case-meta"><span class="n">A</span><span>Java · distributed</span><a href="https://github.com/Nabha756/FlowSync">source ↗</a></div>
+      <div>
+        <h3>FlowSync</h3>
+        <p class="one">A job-processing service that runs jobs asynchronously through RabbitMQ and retries the ones that fail.</p>
+        <div class="stack"><span>Java 21</span><span>Spring Boot 3</span><span>RabbitMQ</span><span>PostgreSQL</span><span>Redis</span><span>Docker</span></div>
+        <div class="dec">
+          <div><h4>Problem</h4><p>Retrying a failed job inside the worker blocks it from processing other jobs, and retrying straight away often fails again for the same reason.</p></div>
+          <div><h4>Approach</h4><p>Failed jobs go to a retry queue with a 10 s message TTL, after which RabbitMQ sends them back to the job queue. After 3 retries a job is moved to a dead-letter queue.</p></div>
+          <div><h4>Also</h4><p>Each attempt is saved to an execution history table in PostgreSQL. Job status is cached in Redis, and job records use <code>@Version</code> optimistic locking.</p></div>
+        </div>
+        <pre class="code" aria-label="Excerpt from RabbitMQConfig.java"><span class="c">// RabbitMQConfig.java (excerpt from the repository)</span>
+<span class="k">public</span> Queue jobRetryQueue() {
+    <span class="k">return</span> QueueBuilder.durable(QUEUE_RETRY)
+            .withArgument(<span class="s">"x-message-ttl"</span>, 10000)
+            .withArgument(<span class="s">"x-dead-letter-exchange"</span>, EXCHANGE)
+            .withArgument(<span class="s">"x-dead-letter-routing-key"</span>, ROUTING_JOB_EXECUTE)
+            ...</pre>
+        <p class="cap">The retry queue configuration. The simulation at the top of the page uses the same values.</p>
+      </div>
+    </article>
+
+    <article class="case" id="customer">
+      <div class="case-meta"><span class="n">B</span><span>Python · MongoDB</span><a href="https://github.com/Nabha756/customer_behavior_system">source ↗</a></div>
+      <div>
+        <h3>Customer Behavior Analytics</h3>
+        <p class="one">A Flask and MongoDB application that tracks user activity and predicts customer churn.</p>
+        <div class="stack"><span>Python</span><span>Flask</span><span>MongoDB · PyMongo</span><span>Scikit-learn</span><span>Socket.IO</span><span>JWT</span></div>
+        <div class="dec">
+          <div><h4>Problem</h4><p>The most frequent query fetches a user's most recent activity. Without a suitable index, MongoDB has to scan all events and sort them in memory.</p></div>
+          <div><h4>Approach</h4><p>A compound index on <code>(user_id, timestamp desc)</code> returns a user's events already sorted. A unique index on <code>email</code> prevents duplicate accounts.</p></div>
+          <div><h4>Also</h4><p>K-Means customer segmentation and a Random Forest churn model, served through JWT-authenticated APIs, with live updates over Socket.IO.</p></div>
+        </div>
+        <pre class="code" aria-label="Excerpt from backend/api/activities.py"><span class="c"># backend/api/activities.py (excerpt from the repository)</span>
+collection.create_index([(<span class="s">"user_id"</span>, 1), (<span class="s">"timestamp"</span>, -1)])
+<span class="c"># backend/app.py</span>
+collections[<span class="s">"users"</span>].create_index(<span class="s">"email"</span>, unique=<span class="k">True</span>)</pre>
+        <div class="links"><a href="#lab">Compare this query with different indexes ↓</a></div>
+      </div>
+    </article>
+
+    <article class="case" id="paycore">
+      <div class="case-meta"><span class="n">C</span><span>C++17 · OOP</span><a href="https://github.com/Nabha756/PayCore">source ↗</a></div>
+      <div>
+        <h3>PayCore</h3>
+        <p class="one">A command-line payment processing simulator written in C++17.</p>
+        <div class="stack"><span>C++17</span><span>STL</span><span>CMake</span><span>GoogleTest · 51 tests</span></div>
+        <div class="dec">
+          <div><h4>Design</h4><p>Payment and Refund derive from Transaction. Validation, processing, transaction management and file storage are separate classes, each with its own tests.</p></div>
+          <div><h4>Money</h4><p>Amounts are stored as integer paise to avoid floating-point rounding errors. Only masked account numbers are saved to disk.</p></div>
+          <div><h4>Refunds</h4><p>Partial refunds are supported. A refund larger than the remaining refundable amount is rejected before any state changes.</p></div>
+        </div>
+        <div class="ledger" id="ledger" aria-label="Refund rules demo">
+          <div class="ledger-top"><span>PAY-1042 · UPI · <b id="lgAmt">₹1,249.50</b> · refundable <b id="lgLeft">₹1,249.50</b></span><span class="pill Completed" id="lgStatus">Completed</span></div>
+          <div class="ledger-row">
+            <label for="lgIn">Refund amount (₹)<input id="lgIn" inputmode="decimal" value="500"></label>
+            <button class="btn" id="lgGo" type="button">Refund</button>
+            <button class="btn" id="lgReset" type="button">Reset</button>
+          </div>
+          <pre class="ledger-out" id="lgOut">Example: refund ₹500, then ₹800.</pre>
+        </div>
+        <p class="cap">A JavaScript version of the checks in <code>Payment::applyRefund</code>.</p>
+      </div>
+    </article>
+
+    <article class="case" id="accesspay">
+      <div class="case-meta"><span class="n">D</span><span>Web · accessibility</span><a href="https://accesspay-bwgl.onrender.com">live demo ↗</a><a href="https://github.com/Nabha756/AccessPay">source ↗</a></div>
+      <div>
+        <h3>AccessPay</h3>
+        <p class="one">A simulated payments web app built to meet WCAG 2.2 AA accessibility guidelines.</p>
+        <div class="stack"><span>HTML/CSS</span><span>JavaScript modules</span><span>Playwright</span><span>axe-core</span><span>101 tests</span></div>
+        <div class="dec">
+          <div><h4>Flow</h4><p>Simulated UPI, debit card and net banking checkout, with a review step, success, failure and pending outcomes, and refunds within 30 days.</p></div>
+          <div><h4>Detail</h4><p>The checkout shows the amount in words to help catch typing mistakes. Transaction filters are stored in the URL.</p></div>
+          <div><h4>Testing</h4><p>57 unit tests and 44 Playwright browser tests, including axe-core accessibility checks.</p></div>
+        </div>
+        <div class="shots">
+          <figure class="shot"><img src="img/accesspay_overview.jpg" alt="AccessPay overview with payment totals and recent payments" loading="lazy" width="1100" height="705"><figcaption>overview</figcaption></figure>
+          <figure class="shot"><img src="img/accesspay_checkout.jpg" alt="AccessPay checkout showing the amount written in words" loading="lazy" width="1100" height="705"><figcaption>checkout · amount in words</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="case" id="fleet">
+      <div class="case-meta"><span class="n">E</span><span>Python · ML</span><a href="https://connected-fleet-intelligence.onrender.com/">live demo ↗</a><a href="https://github.com/Nabha756/Connected-Fleet-Intelligence">source ↗</a></div>
+      <div>
+        <h3>Connected Fleet Intelligence</h3>
+        <p class="one">A model that predicts machine failures 48 hours ahead, evaluated on a later time period than it was trained on.</p>
+        <div class="stack"><span>Pandas</span><span>Scikit-learn</span><span>PostgreSQL · Supabase</span><span>Streamlit</span><span>Pytest · 28 tests</span></div>
+        <div class="metrics">
+          <div class="metric"><b>0.88</b><span>precision</span></div>
+          <div class="metric"><b>0.97</b><span>recall</span></div>
+          <div class="metric"><b>0.97</b><span>PR-AUC</span></div>
+          <div class="metric"><b>876k</b><span>sensor readings validated</span></div>
+        </div>
+        <p class="cap" style="margin-top:0">Uses Microsoft's public simulated predictive-maintenance dataset (100 machines). An Isolation Forest flags 59% of the days before a failure and 2.8% of other days.</p>
+        <div class="shots">
+          <figure class="shot"><img src="img/fleet_overview.jpg" alt="Fleet overview page of the Streamlit dashboard" loading="lazy" width="1100" height="704"><figcaption>fleet overview</figcaption></figure>
+          <figure class="shot"><img src="img/service_risk.jpg" alt="Machines ranked by 48-hour failure risk" loading="lazy" width="1100" height="704"><figcaption>48-hour service risk</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="case-meta"><span class="n">+</span><span>more on GitHub</span></div>
+      <div class="more">
+        <a href="https://github.com/Nabha756/TaskSphere"><b>TaskSphere</b><span>Spring Boot + Next.js. JWT refresh-token rotation, role-based access, Redis cache, JUnit + Mockito in GitHub Actions CI.</span><i>Java · Spring Boot</i></a>
+        <a href="https://github.com/Nabha756/commerceflow"><b>CommerceFlow</b><span>Gateway with separate auth, product and order services, each with its own Prisma schema and Docker image.</span><i>TypeScript · Express</i></a>
+        <a href="https://github.com/Nabha756/api-monitoring-project"><b>API Monitoring</b><span>Uptime, latency and request logs for registered APIs, with a React dashboard.</span><i>Node.js · MongoDB</i></a>
+        <a href="https://sih-26099-frontend.onrender.com/login"><b>Material Code Harmonization</b><span>Smart India Hackathon 2026 team project, shortlisted for Round 2. Fuzzy and semantic matching with pgvector.</span><i>FastAPI · Spring Boot</i></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="lab">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">02 · Index comparison</span><div><h2>One query, four indexes</h2></div>
+      <p>The activity-feed query from Customer Behavior Analytics. Select an index to compare how many keys and documents are read to return 20 results.</p></div>
+    <div class="lab">
+      <div class="lab-q"><span class="k">db</span>.activities.find({ user_id: <span id="labUser">"u_0421"</span> }).sort({ timestamp: -1 }).limit(20)</div>
+      <div class="lab-body">
+        <div class="lab-pick">
+          <fieldset>
+            <legend>Index on activities</legend>
+            <label class="opt"><input type="radio" name="ix" value="none"><span><code>none</code><small>Only the default _id index.</small></span></label>
+            <label class="opt"><input type="radio" name="ix" value="user"><span><code>{ user_id: 1 }</code><small>Finds the user's events, but not in time order.</small></span></label>
+            <label class="opt"><input type="radio" name="ix" value="rev"><span><code>{ timestamp: -1, user_id: 1 }</code><small>Same fields in a different order.</small></span></label>
+            <label class="opt"><input type="radio" name="ix" value="compound" checked><span><code>{ user_id: 1, timestamp: -1 }</code><small>The index used in the project.</small></span></label>
+          </fieldset>
+          <button class="btn" id="labUserBtn" type="button">Try another user</button>
+        </div>
+        <div class="lab-out">
+          <div class="plan" id="labPlan" aria-live="polite"></div>
+          <div class="bars">
+            <div class="bar-row"><span class="lbl">index keys read</span><div class="track"><div class="fill" id="bKeys"></div></div><span class="val" id="vKeys">0</span></div>
+            <div class="bar-row"><span class="lbl">documents read</span><div class="track"><div class="fill" id="bDocs"></div></div><span class="val" id="vDocs">0</span></div>
+            <div class="bar-row"><span class="lbl">sorted in memory</span><div class="track"><div class="fill" id="bSort"></div></div><span class="val" id="vSort">0</span></div>
+          </div>
+          <p class="verdict" id="labVerdict"></p>
+        </div>
+      </div>
+      <div class="lab-note">Calculated in the browser over <span id="labN">50,000</span> generated documents for 500 users. This is a simplified model of how each index is scanned, not output from a MongoDB server.</div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">03 · Background</span><div><h2>Experience &amp; education</h2></div></div>
+    <div class="rows">
+      <div class="row"><span class="when">May – Jul 2024</span><div>
+        <h3>Software Engineering Intern · TechnoScripts, Pune</h3>
+        <ul>
+          <li>Built full-stack features with React.js and Node.js/Express.js REST APIs backed by MongoDB.</li>
+          <li>Designed and integrated REST endpoints between modules; debugged services and optimised queries.</li>
+          <li>Worked in Agile/Scrum sprints with planning, testing and code reviews.</li>
+        </ul>
+      </div></div>
+      <div class="row"><span class="when">Expected June 2028</span><div>
+        <h3>B.E. Computer Engineering, Honors in Data Science</h3>
+        <p>PES Modern College of Engineering, Pune · CGPA 8.89 / 10</p>
+      </div></div>
+      <div class="row"><span class="when">2025</span><div>
+        <h3>Diploma in Computer Engineering</h3>
+        <p>Government Polytechnic, Pune · 91.93%</p>
+      </div></div>
+      <div class="row"><span class="when">Achievements</span><div>
+        <h3>Smart India Hackathon 2026 · Team Manager, ACM Student Chapter</h3>
+        <p>Shortlisted for Round 2 with an AI-driven material code standardisation solution. Coordinates team activities and chapter initiatives at ACM.</p>
+      </div></div>
+      <div class="row"><span class="when">Certifications</span><div>
+        <p><a href="https://drive.google.com/file/d/15vQ2-yOO2vn1JKl0Q7Qjuzss6PvAKzga/view">AWS Academy – AWS Machine Learning</a> · <a href="https://drive.google.com/file/d/12nGkbAidT58cC2qZiyuVCjo4iGfQJGhd/view">IBM SkillsBuild – Data Fundamentals</a> · <a href="https://drive.google.com/file/d/1hdAGYsSJ5v3ReLx14ace0qopiK0ETbLE/view">Simplilearn – SQL for Data Science</a></p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head"><span class="idx">04 · Contact</span><div>
+      <p class="contact-big">Open to software engineering internships.</p>
+      <div class="contact-lines">
+        <div>email · <a href="mailto:kulkarninabha4@gmail.com">kulkarninabha4@gmail.com</a> <code>kulkarninabha4@gmail.com</code></div>
+        <div>github · <a href="https://github.com/Nabha756">github.com/Nabha756</a></div>
+        <div>linkedin · <a href="https://linkedin.com/in/nabha-kulkarni-90bcd">linkedin.com/in/nabha-kulkarni-90bcd</a></div>
+        <div>phone · +91 90286 91865</div>
+      </div>
+    </div></div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">© 2026 Nabha Kulkarni</div></footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------- FlowSync simulation ---------------- */
+  const svg = document.getElementById('simSvg');
+  const layer = document.getElementById('tokens');
+  const NS = 'http://www.w3.org/2000/svg';
+  const P = { api:[52,70], ex:[212,70], q:[372,70], w:[532,70], db:[558,160], r:[372,214], d:[580,236] };
+  const routes = {
+    toQueue: [P.api,[162,70],P.ex,[322,70],P.q],
+    toWorker: [P.q,[482,70],P.w],
+    toDb: [P.w,[555,92],P.db],
+    toRetry: [P.w,[495,92],[495,214],[422,214],P.r],
+    backFromRetry: [P.r,[322,214],[212,214],[212,92],P.ex,[322,70],P.q],
+    toDead: [P.w,[582,70],[612,70],[612,214],P.d]
+  };
+  const MAX_RETRIES = 3, TTL_MS = 10000, FAIL_P = 0.2;
+  let fast = true, auto = true, seq = 0;
+  const queue = []; let busy = false;
+  const counts = { ok:0, retry:0, dead:0, inflight:0 };
+  const el = id => document.getElementById(id);
+  const speed = () => fast ? 5 : 1;
+
+  function log(html){
+    const li = document.createElement('li'); li.innerHTML = html;
+    const ul = el('log'); ul.prepend(li); while (ul.children.length > 6) ul.lastChild.remove();
+  }
+  function render(){
+    el('cOk').textContent = counts.ok; el('cRetry').textContent = counts.retry;
+    el('cDead').textContent = counts.dead; el('cIn').textContent = counts.inflight;
+    el('qDepth').textContent = 'depth ' + queue.length;
+    el('dDepth').textContent = counts.dead + ' parked';
+  }
+  function token(job){
+    const g = document.createElementNS(NS,'g');
+    const c = document.createElementNS(NS,'circle'); c.setAttribute('r', 7);
+    c.setAttribute('fill', job.poison ? 'var(--bad)' : 'var(--accent)');
+    c.setAttribute('stroke','var(--surface)'); c.setAttribute('stroke-width','2');
+    const t = document.createElementNS(NS,'text'); t.setAttribute('text-anchor','middle'); t.setAttribute('dy','-11');
+    t.setAttribute('class','sub'); t.textContent = '#' + job.id;
+    g.append(c,t); layer.append(g); return g;
+  }
+  function place(g,[x,y]){ g.setAttribute('transform',`translate(${x},${y})`); }
+  function travel(g, pts, ms){
+    return new Promise(res => {
+      if (reduce) { place(g, pts[pts.length-1]); return setTimeout(res, 60); }
+      const segs = []; let total = 0;
+      for (let i=1;i<pts.length;i++){ const d = Math.hypot(pts[i][0]-pts[i-1][0], pts[i][1]-pts[i-1][1]); segs.push(d); total += d; }
+      const t0 = performance.now(); let done = false;
+      const finish = () => { if (done) return; done = true; place(g, pts[pts.length-1]); res(); };
+      setTimeout(finish, ms + 120); // frames can pause (background tab); never leave a job stuck
+      (function step(now){
+        if (done) return;
+        let f = Math.min(1,(now-t0)/ms), dist = f*total, i = 0;
+        while (i < segs.length-1 && dist > segs[i]) { dist -= segs[i]; i++; }
+        const a = pts[i], b = pts[i+1], k = segs[i] ? dist/segs[i] : 1;
+        place(g,[a[0]+(b[0]-a[0])*k, a[1]+(b[1]-a[1])*k]);
+        f < 1 ? requestAnimationFrame(step) : finish();
+      })(t0);
+    });
+  }
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const hot = (id,on) => el(id).classList.toggle('hot', on);
+
+  async function submit(poison=false){
+    const job = { id: ++seq, poison, attempt: 0 };
+    counts.inflight++; render();
+    job.g = token(job); place(job.g, P.api);
+    await travel(job.g, routes.toQueue, 900/speed()*2);
+    enqueue(job);
+  }
+  function enqueue(job){ queue.push(job); place(job.g,[P.q[0]-30+Math.min(queue.length,4)*12, P.q[1]+2]); render(); pump(); }
+  async function pump(){
+    if (busy || !queue.length) return;
+    busy = true; const job = queue.shift(); render();
+    hot('n-w',true); el('wState').textContent = 'running #' + job.id;
+    await travel(job.g, routes.toWorker, 500/speed()*2);
+    await wait(500/speed()*2);
+    job.attempt++;
+    const failed = job.poison || Math.random() < FAIL_P;
+    hot('n-w',false); el('wState').textContent = 'idle';
+    busy = false; pump();
+    if (!failed){
+      counts.ok++; counts.inflight--; render();
+      log(`<b class="ok">#${job.id} completed</b> · attempt ${job.attempt} saved to execution history`);
+      await travel(job.g, routes.toDb, 400/speed()*2); job.g.remove(); return;
+    }
+    if (job.attempt <= MAX_RETRIES){
+      counts.retry++; render();
+      log(`<b class="warn">#${job.id} failed</b> · retry ${job.attempt}/${MAX_RETRIES} · waiting ${TTL_MS/1000}s in retry.queue`);
+      hot('n-r',true);
+      await travel(job.g, routes.toRetry, 700/speed()*2);
+      await wait(TTL_MS / speed());
+      hot('n-r',false);
+      await travel(job.g, routes.backFromRetry, 1000/speed()*2);
+      enqueue(job);
+    } else {
+      counts.dead++; counts.inflight--; render();
+      log(`<b class="bad">#${job.id} dead-lettered</b> · ${MAX_RETRIES} retries used, parked for inspection`);
+      await travel(job.g, routes.toDead, 500/speed()*2);
+      place(job.g,[P.d[0]-40+(counts.dead%6)*14, P.d[1]+34]);
+      job.g.querySelector('text').remove();
+    }
+  }
+  el('bJob').onclick = () => submit(false);
+  el('bPoison').onclick = () => submit(true);
+  el('tAuto').checked = !reduce; auto = !reduce;
+  el('tAuto').onchange = e => { auto = e.target.checked; el('simState').textContent = auto ? 'running' : 'paused'; };
+  el('tFast').onchange = e => { fast = e.target.checked; };
+  if (reduce) el('simState').textContent = 'paused';
+  setInterval(() => { if (auto && !document.hidden && counts.inflight < 6) submit(Math.random() < 0.08); }, 2600);
+  log('ready');
+  if (auto) { submit(false); setTimeout(() => submit(true), 1400); }
+
+  /* ---------------- Index lab ---------------- */
+  const N = 50000, USERS = 500;
+  let s = 42; const rnd = () => (s = (s*1103515245 + 12345) % 2147483648) / 2147483648;
+  const docs = new Array(N);
+  const now = Date.UTC(2026,10,1);
+  for (let i=0;i<N;i++){
+    const u = Math.floor(Math.pow(rnd(),1.6)*USERS);
+    docs[i] = { user: u, ts: now - Math.floor(rnd()*90*86400e3) };
+  }
+  el('labN').textContent = N.toLocaleString('en-IN');
+  const byTs = docs.map((d,i)=>i).sort((a,b)=>docs[b].ts-docs[a].ts);
+  let user = 421;
+  const fmt = n => n.toLocaleString('en-IN');
+
+  function run(kind){
+    const mine = docs.filter(d => d.user === user).length;
+    const LIMIT = 20, ret = Math.min(LIMIT, mine);
+    let keys, read, sorted, plan, verdict;
+    if (kind === 'none'){
+      keys = 0; read = N; sorted = mine;
+      plan = [['COLLSCAN','bad'],['SORT (in memory)','bad'],['LIMIT 20','']];
+      verdict = `All ${fmt(N)} documents are read to find this user's ${fmt(mine)} events, which are then sorted in memory. The work grows with the size of the collection.`;
+    } else if (kind === 'user'){
+      keys = mine; read = mine; sorted = mine;
+      plan = [['IXSCAN { user_id }','good'],['FETCH',''],['SORT (in memory)','warn'],['LIMIT 20','']];
+      verdict = `The index finds the user's ${fmt(mine)} events directly, but they are not in time order, so all of them are fetched and sorted before 20 are returned.`;
+    } else if (kind === 'rev'){
+      let k = 0, hits = 0;
+      for (const i of byTs){ k++; if (docs[i].user === user && ++hits === ret) break; }
+      keys = k; read = ret; sorted = 0;
+      plan = [['IXSCAN { timestamp, user_id }','warn'],['FETCH',''],['LIMIT 20','']];
+      verdict = `The index is in time order, so no sort is needed, but user_id is not the first field. The scan reads ${fmt(k)} keys across all users to find 20 matches. Following the ESR rule (equality, sort, range), the equality field should come first.`;
+    } else {
+      keys = ret; read = ret; sorted = 0;
+      plan = [['IXSCAN { user_id, timestamp }','good'],['FETCH',''],['LIMIT 20','good']];
+      verdict = `The first field matches the equality condition and the second matches the sort. MongoDB reads only this user's entries, already newest-first, and stops after 20.`;
+    }
+    el('labPlan').innerHTML = plan.map(([t,c],i)=> (i?'<span class="arrow">→</span>':'') + `<span class="stage ${c}">${t}</span>`).join('');
+    const max = N;
+    const setBar = (id, v, cls) => { const f = el(id); f.style.width = (v ? Math.max(1.2, 100*Math.log10(v+1)/Math.log10(max+1)) : 0) + '%'; f.className = 'fill ' + cls; };
+    setBar('bKeys', keys, keys > 1000 ? 'warn' : ''); setBar('bDocs', read, read > 1000 ? 'bad' : ''); setBar('bSort', sorted, sorted ? 'warn' : '');
+    el('vKeys').textContent = fmt(keys); el('vDocs').textContent = fmt(read); el('vSort').textContent = fmt(sorted);
+    el('labVerdict').textContent = verdict;
+  }
+  const current = () => document.querySelector('input[name="ix"]:checked').value;
+  document.querySelectorAll('input[name="ix"]').forEach(r => r.addEventListener('change', () => run(current())));
+  el('labUserBtn').onclick = () => { user = Math.floor(rnd()*USERS); el('labUser').textContent = `"u_${String(user).padStart(4,'0')}"`; run(current()); };
+  run('compound');
+
+  /* ---------------- PayCore refund rules ---------------- */
+  const TOTAL = 124950; let refunded = 0;
+  const rupees = p => '₹' + (p/100).toLocaleString('en-IN',{minimumFractionDigits:2, maximumFractionDigits:2});
+  const status = () => refunded === 0 ? 'Completed' : refunded < TOTAL ? 'PartiallyRefunded' : 'Refunded';
+  function paint(){ el('lgLeft').textContent = rupees(TOTAL-refunded); const st = status(); const p = el('lgStatus'); p.textContent = st; p.className = 'pill ' + st; }
+  el('lgGo').onclick = () => {
+    const raw = el('lgIn').value.trim(); const out = el('lgOut');
+    const m = /^\d+(\.\d{1,2})?$/.exec(raw);
+    if (!m){ out.innerHTML = `<span class="bad">ValidationError</span>: enter an amount like 250 or 99.50`; return; }
+    const [r, f=''] = raw.split('.'); const paise = parseInt(r,10)*100 + parseInt((f+'00').slice(0,2),10);
+    const st = status();
+    if (st === 'Refunded'){ out.innerHTML = `<span class="bad">InvalidOperationError</span>: payment PAY-1042 is REFUNDED and cannot be refunded\nstate unchanged`; return; }
+    if (paise <= 0){ out.innerHTML = `<span class="bad">ValidationError</span>: refund amount must be positive\nstate unchanged`; return; }
+    if (paise > TOTAL - refunded){ out.innerHTML = `<span class="bad">ValidationError</span>: refund amount ${rupees(paise)} exceeds refundable amount ${rupees(TOTAL-refunded)}\nstate unchanged · stored as ${paise} paise vs ${TOTAL-refunded} paise`; return; }
+    refunded += paise; paint();
+    out.innerHTML = `<span class="ok">REF-${1000 + Math.floor(refunded/37)%9000} created</span> · ${rupees(paise)} (${paise} paise, integer)\nPAY-1042 → ${status()}`;
+  };
+  el('lgReset').onclick = () => { refunded = 0; paint(); el('lgOut').textContent = 'Example: refund ₹500, then ₹800.'; };
+  paint();
+})();
+</script>
+</body>
+</html>
